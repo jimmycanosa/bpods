@@ -1,34 +1,30 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, FlatList } from 'react-native';
+import apodsJson from '../src/data/apods.json';
+import ApodListItem from '../src/components/ApodListItem';
+import { useState } from 'react';
+import FullScreenImage from '../src/components/FullScreenImage';
 
 export default function Page() {
+  const [apods, setApods] = useState(apodsJson);
+  const [activePicture, setActivePicture] = useState<string>(null);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
+    <>
+      <FlatList
+        data={apods}
+        renderItem={({ item }) => (
+          <ApodListItem
+            apod={item}
+            onImagePress={() => setActivePicture(item.url)}
+          />
+        )}
+      />
+      <FullScreenImage
+        url={activePicture}
+        onClose={() => setActivePicture(null)}
+      />
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
-});
+const styles = StyleSheet.create({});
