@@ -4,9 +4,10 @@ import ApodListItem from '@/components/ApodListItem';
 import { useEffect, useState } from 'react';
 import FullScreenImage from '@/components/FullScreenImage';
 import { fetchApods } from '@/api/apods';
+import { Apod } from '@/types';
 
 export default function Page() {
-  const [apods, setApods] = useState(apodsJson);
+  const [apods, setApods] = useState<Apod[]>(apodsJson);
   const [activePicture, setActivePicture] = useState<string>(null);
 
   useEffect(() => {
