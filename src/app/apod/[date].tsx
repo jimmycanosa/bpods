@@ -39,3 +39,11 @@ const ApodDetails = () => {
 };
 
 export default ApodDetails;
+
+export async function generateStaticParams(): Promise<
+  Record<string, string>[]
+> {
+  const dates = ['2023-07-09', '2023-07-10', '2023-07-11'];
+
+  return dates.map((date) => ({ date: date }));
+}
